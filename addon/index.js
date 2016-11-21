@@ -89,7 +89,7 @@ export default Ember.Mixin.create({
     Object.keys(rels).forEach(rel => {
 
       // guard against potential `null` relationship, allowed by JSON API
-      if (!rels[rel]) {
+      if (!rels[rel] || !rels[rel].data) {
         return;
       }
 
