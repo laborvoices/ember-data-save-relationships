@@ -1,6 +1,5 @@
 import Mixin from '@ember/object/mixin';
 import Ember from 'ember';
-import { singularize } from 'ember-inflector';
 import { get, computed } from '@ember/object';
 import { getOwner } from '@ember/application';
 
@@ -101,7 +100,7 @@ export default Mixin.create({
     let internalModelKey = get(this, 'internalModelKey');
     if (json.attributes !== undefined && json.attributes[internalModelKey] !== undefined)
     {
-      json.type = singularize(json.type);
+      json.type = this.modelNameFromPayloadKey(json.type);
 
       const record = store.peekAll(json.type)
         .filterBy('currentState.stateName', "root.loaded.created.uncommitted")
